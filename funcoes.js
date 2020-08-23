@@ -40,11 +40,19 @@ function removerSeIncluir(array, padrao) {
     return array.filter(el => !el.includes(padrao))
 }
 
+function removerSeApenasNumero(array) {
+    return array.filter(el => {
+        const num = parseInt(el.trim())
+        return num !== num
+    })
+}
+
 module.exports = {
     lerDiretorio,
     elementosTerminadosCom,
     lerArquivo,
     lerArquivos,
     removerSeVazio,
-    removerSeIncluir
+    removerSeIncluir,
+    removerSeApenasNumero
 }
