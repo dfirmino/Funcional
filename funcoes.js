@@ -69,6 +69,15 @@ function separarPor(separador) {
     }
 }
 
+function ordernarPorAtributo(attr, ordem='asc') {
+    return function(array) {
+        const asc = (o1,o2) => o1[attr] - o2[attr]
+        const desc = (o1,o2) => o2[attr] - o1[attr]
+        
+        return array.sort(ordem === 'desc' ? desc : asc)
+    }
+}
+
 module.exports = {
     lerDiretorio,
     elementosTerminadosCom,
@@ -79,5 +88,6 @@ module.exports = {
     removerSeApenasNumero,
     removerSimbolos,
     mesclarConteudos,
-    separarPor
+    separarPor,
+    ordernarPorAtributo
 }
