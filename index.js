@@ -8,21 +8,28 @@ const simbolos = [
     '\r','[', ']','(', ')'
 ]
 
-const mesclarConteudos = array => array.join(' ')
-const separarPorLinhas = array => array.split('\n')
-const separarPorPalavras = array => array.split(' ')
+function agruparPalavras(palavras) {
+    return Object.values( palavras.reduce( (acum, palavra) => {
+        const p = palavra.toLowerCase()
+        const qtd = acum[p] ? acum[p].qtd + 1 : 1
+        acum[p] = { elemento: p, qtd }
+        return acum
+    }, {}) )
+}
 
 fn.lerDiretorio(caminho)
     .then(arquivos => fn.elementosTerminadosCom(arquivos, '.srt'))
     .then(caminhos => fn.lerArquivos(caminhos))
-    .then(mesclarConteudos)
-    .then(separarPorLinhas)
+    .then(fn.mesclarConteudos)
+    .then(fn.separarPor('\n'))
     .then(fn.removerSeVazio)
     .then(fn.removerSeIncluir('-->'))
     .then(fn.removerSeApenasNumero)
     .then(fn.removerSimbolos(simbolos))
-    .then(mesclarConteudos)
-    .then(separarPorPalavras)
+    .then(fn.mesclarConteudos)
+    .then(fn.separarPor(' '))
     .then(fn.removerSeVazio)
+    .then(fn.removerSeApenasNumero)
+    .then(agruparPalavras)
     .then(console.log)
     .catch(console.log)

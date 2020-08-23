@@ -61,6 +61,14 @@ function removerSimbolos(simbolos) {
     }
 }
 
+const mesclarConteudos = array => array.join(' ')
+
+function separarPor(separador) {
+    return function (texto) {
+        return texto.split(separador)
+    }
+}
+
 module.exports = {
     lerDiretorio,
     elementosTerminadosCom,
@@ -69,5 +77,7 @@ module.exports = {
     removerSeVazio,
     removerSeIncluir,
     removerSeApenasNumero,
-    removerSimbolos
+    removerSimbolos,
+    mesclarConteudos,
+    separarPor
 }
