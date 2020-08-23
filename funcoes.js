@@ -36,8 +36,10 @@ function removerSeVazio(array) {
     return array.filter(el => el.trim())
 }
 
-function removerSeIncluir(array, padrao) {
-    return array.filter(el => !el.includes(padrao))
+function removerSeIncluir(padrao) {
+    return function(array){
+        return array.filter(el => !el.includes(padrao))
+    }
 }
 
 function removerSeApenasNumero(array) {
