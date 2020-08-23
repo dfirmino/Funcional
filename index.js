@@ -8,14 +8,21 @@ const simbolos = [
     '\r','[', ']','(', ')'
 ]
 
+const mesclarConteudos = array => array.join(' ')
+const separarPorLinhas = array => array.split('\n')
+const separarPorPalavras = array => array.split(' ')
+
 fn.lerDiretorio(caminho)
     .then(arquivos => fn.elementosTerminadosCom(arquivos, '.srt'))
     .then(caminhos => fn.lerArquivos(caminhos))
-    .then(conteudos => conteudos.join('\n'))
-    .then(todoConteudo => todoConteudo.split('\n'))
+    .then(mesclarConteudos)
+    .then(separarPorLinhas)
     .then(fn.removerSeVazio)
     .then(fn.removerSeIncluir('-->'))
     .then(fn.removerSeApenasNumero)
     .then(fn.removerSimbolos(simbolos))
+    .then(mesclarConteudos)
+    .then(separarPorPalavras)
+    .then(fn.removerSeVazio)
     .then(console.log)
     .catch(console.log)
